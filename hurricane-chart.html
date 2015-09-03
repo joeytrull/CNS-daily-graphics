@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	    <script src="http://code.highcharts.com/highcharts.js"></script>
 		<script src="http://code.highcharts.com/modules/exporting.js"></script>
 		<script type="text/javascript">
+			
 			// Plugin to add support for credits.target in Highcharts.
 			$(document).ready(function () {
 				Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (proceed, credits) {
@@ -24,10 +26,10 @@
 			            type: 'column'
 			        },
 			        title: {
-			            text: 'More Major Hurricanes Predicted for this Season, Continuing 2014 Trend'
+			            text: 'Continuing 2014 Trend, More Major Hurricanes Hit This Season'
 			        },
 			        subtitle: {
-			            text: '2015 is proving to be an active year for hurricanes in the Atlantic and Pacific.  So far in 2015, there have been eight "major" hurricanes, one more than at this time last year and significantly more than 2013, when there were zero major storms by the beginning of September. It is an El Nino year, causing water temperature and wind conditions similar to last year.',
+			            text: '<strong>By Madeleine Deason and Joey Trull</strong>' + '<br>CAPITAL NEWS SERVICE<br>' + '2015 is proving to be an active year for hurricanes in the Atlantic and Pacific.  So far in 2015, there have been eight "major" hurricanes, one more than at this time last year and significantly more than 2013, when there were zero major storms by the beginning of September. It is an El Niño year, causing water temperature and wind conditions similar to last year. Source: Accuweather.com.',
 			        },
 			        xAxis: {
 			            categories: ['2010', '2011', '2012', '2013', '2014', '2015']
@@ -58,7 +60,7 @@
 			        },
 			        credits: {
 			        	enabled: true,
-			            text: 'By Madeleine Deason and Joey Trull',
+			            text: 'Capital News Service',
 			            href: 'http://cnsmaryland.org/',
 			            target: '_blank'
 			        },
@@ -85,7 +87,7 @@
 			        }, {
 			            name: 'Major Hurricane (Category 3-5)',
 			            color: 'red',
-			            data: [4, 5, 4, 0, 7, 8]
+			            data: [4, 5, 4, {y: 0, dataLabels: {enabled:false}}, 7, 8]
 			        }]
 			    });
 			});
