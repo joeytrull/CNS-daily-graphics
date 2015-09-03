@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	    <script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+		<script type="text/javascript">
+			// Plugin to add support for credits.target in Highcharts.
+			$(document).ready(function () {
+				Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (proceed, credits) {
+					proceed.call(this, credits);
+					if (this.credits && credits.target) {
+        				this.credits.on('click', function () {
+            				$('<a>').attr({
+                				href: credits.href,
+                				target: credits.target
+            				})[0].click();
+        				});
+    				}    
+				});
+
+			    $('#container').highcharts({
+			        chart: {
+			            type: 'column'
+			        },
+			        title: {
+			            text: 'More Major Hurricanes Predicted for this Season, Continuing 2014 Trend'
+			        },
+			        subtitle: {
+			            text: '2015 is proving to be an active year for hurricanes in the Atlantic and Pacific.  So far in 2015, there have been eight "major" hurricanes, one more than at this time last year and significantly more than 2013, when there were zero major storms by the beginning of September. It is an El Nino year, causing water temperature and wind conditions similar to last year.',
+			        },
+			        xAxis: {
+			            categories: ['2010', '2011', '2012', '2013', '2014', '2015']
+			        },
+			        yAxis: {
+			            min: 0,
+			            title: {
+			                text: 'Number of storms (up to Sept. 3)'
+			            },
+			            stackLabels: {
+			                enabled: true,
+			                style: {
+			                    fontWeight: 'bold',
+			                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+			                }
+			            }
+			        },
+			        legend: {
+			            align: 'center',
+			            verticalAlign: 'bottom',
+			            floating: false,
+			            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+			            shadow: false
+			        },
+			        tooltip: {
+			            headerFormat: '<b>{point.x}</b><br/>',
+			            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+			        },
+			        credits: {
+			        	enabled: true,
+			            text: 'By Madeleine Deason and Joey Trull',
+			            href: 'http://cnsmaryland.org/',
+			            target: '_blank'
+			        },
+			        plotOptions: {
+			            column: {
+			                stacking: 'normal',
+			                dataLabels: {
+			                    enabled: true,
+			                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black',
+			                    style: {
+			                    textShadow: false
+			                	}
+			                }
+			            }
+			        },
+			        series: [{
+			            name: 'Tropical Storm',
+			            color: '#CACED2',
+			            data: [7, 12, 9, 12, 6, 10]
+			        }, {
+			            name: 'Minor Hurricane (Category 1-2)',
+			            color: '#FFCC70',
+			            data: [2, 3, 10, 7, 6, 4]
+			        }, {
+			            name: 'Major Hurricane (Category 3-5)',
+			            color: 'red',
+			            data: [4, 5, 4, 0, 7, 8]
+			        }]
+			    });
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	</body>
+</html>
